@@ -1,0 +1,34 @@
+<h1 mat-dialog-title>Adicionar operação</h1>
+
+<mat-dialog-content [formGroup]="formOperation">
+  <p>Preencha os dados da operação</p>
+  <mat-form-field>
+    <mat-label>Ativo</mat-label>
+    <mat-select formControlName="asset" name="asset">
+      <mat-option *ngFor="let asset of assets" [value]="asset.viewValue">
+        {{asset.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Quantidade</mat-label>
+    <input matInput formControlName="quantity" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Valor Investido</mat-label>
+    <input matInput formControlName="valueInvest" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Data</mat-label>
+    <input matInput formControlName="date" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Hora</mat-label>
+    <input matInput formControlName="hour" />
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="formOperation">Adicionar</button>
+</mat-dialog-actions>

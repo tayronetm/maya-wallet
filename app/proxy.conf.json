@@ -1,0 +1,7 @@
+{
+  "/api/*": {
+    "target": "https://maya-db-c3999-default-rtdb.firebaseio.com",  
+    "secure": false,
+    "logLevel": "debug"
+  }
+}
