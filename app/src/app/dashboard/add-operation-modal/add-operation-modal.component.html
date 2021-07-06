@@ -4,7 +4,7 @@
   <p>Preencha os dados da operação</p>
   <mat-form-field>
     <mat-label>Ativo</mat-label>
-    <mat-select formControlName="asset" name="asset">
+    <mat-select (ngModelChange)="dataChanged($event)" formControlName="asset" name="asset">
       <mat-option *ngFor="let asset of assets" [value]="asset.viewValue">
         {{asset.viewValue}}
       </mat-option>
@@ -12,11 +12,11 @@
   </mat-form-field>
   <mat-form-field>
     <mat-label>Quantidade</mat-label>
-    <input matInput formControlName="quantity" />
+    <input type="number" (ngModelChange)="dataChanged($event)" matInput formControlName="quantity" />
   </mat-form-field>
   <mat-form-field>
     <mat-label>Valor Investido</mat-label>
-    <input matInput formControlName="valueInvest" />
+    <input type="number" matInput formControlName="valueInvest"/>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Data</mat-label>

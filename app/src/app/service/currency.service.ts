@@ -41,7 +41,6 @@ export class CurrencyService {
       .pipe(
         map(changes => {
           return changes.map(c => {
-            console.log('c.payload', c)
             const data = c.payload.val() as any;
             const key = c.payload.key;
             return { key, ...data };
@@ -64,7 +63,8 @@ export class CurrencyService {
       );
   }
 
-  postOperationByFirebase(param) {
+  postOperationByFirebase(param, debug?) {
+    console.log('DEBUG', debug)
     return this.db.list('operations').push(param)
   }
 
@@ -77,11 +77,11 @@ export class CurrencyService {
   }
 
   updateResumesByFirebase(key, value) {
+    console.log('KEY', key)
     return this.db.list('resumes').update(key,value);
   }
 
   postOperation(param): Observable<any> {
-    console.log('OPERAÇÃO POSTADA')
     this.operations.push(param)
     this.subject.next(this.operations);
     return this.http.post<any>(`${this.api}/operations`, param);
@@ -100,7 +100,6 @@ export class CurrencyService {
   }
 
   updateResume(param): Observable<any> {
-    console.log(param)
     return this.http.put<any>(`${this.api}/resumes/${param.id}`, param);
   }
 

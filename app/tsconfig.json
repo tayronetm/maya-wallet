@@ -1,5 +1,6 @@
 {
   "compileOnSave": false,
+  "include": ["node_modules/angular-bootstrap-md/**/*.ts",  "src/**/*.ts"],
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",

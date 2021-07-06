@@ -8,6 +8,7 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { environment } from '../../environments/environment';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [DashboardComponent, AddOperationModalComponent],
@@ -16,9 +17,11 @@ import { environment } from '../../environments/environment';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    ChartsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
+    AngularFirestoreModule
   ],
   exports: [DashboardComponent],
+  entryComponents: [AddOperationModalComponent]
 })
 export class DashboardModule {}

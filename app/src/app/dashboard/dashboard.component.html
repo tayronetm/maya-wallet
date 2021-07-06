@@ -28,7 +28,7 @@
   </ng-container>
   <ng-container matColumnDef="valueInvestTotal">
     <th mat-header-cell *matHeaderCellDef>Investido</th>
-    <td mat-cell *matCellDef="let element">{{ element.valueInvestTotal }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.valueInvestTotal | currency }}</td>
   </ng-container>
   <ng-container matColumnDef="currentValue">
     <th mat-header-cell *matHeaderCellDef>Atual</th>
@@ -46,3 +46,15 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
+
+<div *ngIf="dataSource.data.length" class="chart">
+  <canvas baseChart 
+    [data]="pieChartData" 
+    [colors]="chartColors"
+    [labels]="pieChartLabels" 
+    [chartType]="pieChartType"
+    [options]="pieChartOptions"
+    [plugins]="pieChartPlugins"
+    [legend]="pieChartLegend">
+  </canvas>
+</div>
