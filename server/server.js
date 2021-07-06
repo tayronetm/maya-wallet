@@ -1,7 +1,8 @@
-import express from 'express';
-import Binance from 'binance-api-node';
-import cors from 'cors';
-import { nanoid } from 'nanoid'
+const express = require('express');
+const Binance = require('binance-api-node').default
+const cors = require('cors');
+const { nanoid } = require('nanoid')
+const path = require("path");
 
 const app = express();
 const port = 3001;
@@ -11,6 +12,11 @@ const binance = Binance();
 app.use(express.json())
 app.use(cors());
 
+app.use(express.static(__dirname + '/public'));
+
+app.get('/', function(req, res) {
+  res.sendFile('index.html');
+});
 
 app.get('/prices', async (req, res) => {
   const query = req.query.name;
@@ -70,6 +76,7 @@ app.post('/resumes/set', async ({ body }, res) => {
 });
 
 app.post('/operations', async (req, res) => {
+  console.log('post operations')
   firebase.database().ref(`/operations/`).push({
     asset: req.body.asset,
     date: req.body.date,
@@ -97,14 +104,4 @@ app.put('/resumes/:id', async (req, res) => {
   res.send("Data saved successfully.");
 });
 
-
-function gambiarra(ref, res) {
-  ref.on('value', (snapshot) => {
-    const changedPost = snapshot.val();
-    res.send(JSON.stringify(changedPost))
-  });
-}
-
-app.listen(port, (err, data) => {
-  !err && console.log(`RUNING BITCH! http://localhost:${port}`);
-});
+app.listen(process.env.PORT || port)

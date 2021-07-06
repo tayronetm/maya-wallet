@@ -10,7 +10,7 @@
 
 .mat-header-cell {
   font-weight: bolder;
-  color: #00e2ed;
+  color: #fbffff;
 }
 
 .demo-button-container {
@@ -19,6 +19,12 @@
 
 .demo-button + .demo-button {
   margin-left: 8px;
+}
+
+.coin-img {
+  width: 1.5em;
+  vertical-align: sub;
+  margin-right: 3px;
 }
 
 .chart {

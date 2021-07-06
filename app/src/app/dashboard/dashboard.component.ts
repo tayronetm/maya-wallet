@@ -17,7 +17,15 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   // chart
   public pieChartOptions: ChartOptions = {
     responsive: true,
+    legend: {
+      position: 'bottom'
+    },
+    animation: {
+      duration: 2000,
+      easing: "easeInBounce"
+    }
   };
+  
   public pieChartLabels: Label[] = [];
   public pieChartData: SingleDataSet = [];
   public pieChartType: ChartType = 'doughnut';
@@ -102,7 +110,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           value.currentValue = value.totalQuantity * result.price
         })
       })
-    }, 10000);
+    }, 2000);
   }
   
   ngAfterViewInit() {
@@ -117,109 +125,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result && result.value) {
-      // const currency$ = this.currencyService.getCurrencies(result.value.asset)
-      // const { price } =  await lastValueFrom(currency$)
-      // const { value: form } = result
-      
-      // this.currencyService.getOperationsByFirebase().subscribe((operations) => {
-      //   this.operations = operations
-      // })
-        /**
-         * TO DO:
-         * CONSOLE EM OPERAÇÕES VEM O QUE?: QUANDO NÃO TEM REGISTRO VEM NULO
-         * SE FOR NULO EU TENHO QUE CRIAR UMA OPERAÇÃO (POST)
-         */
-
-        /**
-         * PARA POSTAR UMA NOVA ORDEM É PRECISO QUE O POST SEJA DIFERENTE
-         * PASSANDO APENAS OS DADOS DO FORMULARIO E NÃO O SOMATORIO QUE NAO EXISTE
-         */
-        //#region 
-    //     if(this.operations.length == 0) {
-    //       console.log('ADICONADO NOVO', this.operations)
-    //       const newResume = {
-    //         asset: form.asset,
-    //         currentPrice: price,
-    //         pm: form.valueInvest / form.quantity,
-    //         totalQuantity: form.quantity,
-    //         priceStyle: false,
-    //         valueInvestTotal: form.valueInvest,
-    //         currentValue: form.quantity * form.valueInvest,
-    //         lp: 20100,
-    //         variation: 511
-    //       }
-    //       this.currencyService.postOperationByFirebase(result.value);
-    //       this.currencyService.postResumesByFirebase(newResume);
-    //       this.getResumes()
-    //       return;
-    //     } else {
-    //       console.log('SOMADO AO EXISTENTE')
-    //       const valueInvestForm = +form.valueInvest
-    //       const totalQuantityForm = +form.quantity
-    //       console.log('operations', this.operations)
-    //       const operationByAsset = this.operations.filter(operation => {
-    //         operation.asset === result.value.asset
-    //       })
-    //       const totalInvest = operationByAsset.reduce((acc, operation) => {
-    //         return acc + +operation.valueInvest
-    //       },0)
-    //       const totalQuantity = operationByAsset.reduce((acc, operation) => {
-    //         return acc + +operation.quantity
-    //       },0)
-
-    //       const totalResume = {
-    //         asset: form.asset,
-    //         currentPrice: price,
-    //         priceStyle: false,
-    //         pm: (totalInvest + valueInvestForm) / (totalQuantity + totalQuantityForm),
-    //         totalQuantity: totalQuantity + totalQuantityForm,
-    //         valueInvestTotal: totalInvest + valueInvestForm,
-    //         currentValue: (totalQuantity + totalQuantityForm) * price,
-    //         lp: 20100,
-    //         variation: 511
-    //       }
-    //       /**
-    //        * SE A EXISTIR UM RESUMO QUE TENHA O MESMO NOME DO QUE ESTÁ SENDO ADICONADO AGORA
-    //        * DEVE SER FEITO UPDATE
-    //        */
-    //       const findCoin = this.dataSource.data.find(resume => {
-    //         return resume.asset === form.asset
-    //       })
-    //       console.log('ENCONTRADO', findCoin)
-    //       /**
-    //        *    asset: "BTCUSDT",
-    //             date: "08/03/21",
-    //             hour: "12:00",
-    //             valueInvest: 20,
-    //             quantity: 60,
-    //       */
-    //       if (findCoin) {
-    //         console.log('update', totalResume)
-    //         this.currencyService.postOperationByFirebase(result.value);
-    //         this.currencyService.updateResumesByFirebase(findCoin.key, totalResume);
-    //         this.getResumes()
-    //       } else {
-    //         console.log('NOVA MOEDA CADASTRADA')
-    //         const resumeNew = {
-    //           asset: form.asset,
-    //           currentPrice: price,
-    //           pm: form.valueInvest / form.quantity,
-    //           totalQuantity: form.quantity,
-    //           priceStyle: false,
-    //           valueInvestTotal: form.valueInvest,
-    //           currentValue: form.quantity * form.valueInvest,
-    //           lp: 20100,
-    //           variation: 511
-    //         }
-    //         this.currencyService.postResumesByFirebase(resumeNew);
-    //         this.getResumes()
-    //       }
-    //     }
-      
-    // }}, (err)=> { console.log(err) });
-    //#endregion
-
-      
         console.log('condição 1')
         const { value: form } = result;
         const currency$ = this.currencyService.getCurrencies(form.asset);
@@ -310,6 +215,27 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       console.log('NOVA CONDIÇÃO')
     }
 
+  }
+
+  getImage(element) {
+    switch (element.asset) {
+      case 'BTCUSDT':
+        return "https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"
+      case 'ADAUSDT':
+        return "https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"
+      case 'ETHUSDT':
+        return "https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"
+      case 'BNBUSDT':
+        return "https://s2.coinmarketcap.com/static/img/coins/64x64/1839.png"
+      case 'ONEUSDT':
+        return "https://s2.coinmarketcap.com/static/img/coins/64x64/3945.png"
+      case 'YFIUSDT':
+        return "https://s2.coinmarketcap.com/static/img/coins/64x64/5864.png"
+      case 'CKBUSDT':
+        return "https://s2.coinmarketcap.com/static/img/coins/64x64/4948.png"
+      case '1INCHUSDT':
+      return "https://s2.coinmarketcap.com/static/img/coins/64x64/8104.png"
+    }
   }
 
   findCoinOnResumes(sources: any, { asset }) {

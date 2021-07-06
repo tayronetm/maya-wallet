@@ -1,8 +1,8 @@
 const firebase = require('firebase');
 
-const projectID = "maya-db-c399";
-const apiKey = "hY5T0ePEjalMDpEOXEdaxUw"
-const dataBaseName = "maya-db-c3999-default-rtdb"
+const projectID = process.env.PROJECT_ID;
+const apiKey = process.env.API_KEY;
+const dataBaseName = process.env.DATABASE
 
 const app = firebase.initializeApp({
     apiKey,
